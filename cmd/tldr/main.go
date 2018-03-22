@@ -6,7 +6,8 @@ import (
 	"os"
 )
 
-const helpText = `usage: tldr [command]
+const helpText = `Simplified and community-driven man pages
+Usage: tldr [command]
   -version
       Display version
 `
