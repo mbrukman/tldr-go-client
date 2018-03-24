@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/tombell/tldr"
 )
 
 const helpText = `Simplified and community-driven man pages
@@ -33,5 +35,9 @@ func main() {
 	args := flag.Args()
 	if len(args) == 0 {
 		flag.Usage()
+	}
+
+	if err := tldr.Show(args[0]); err != nil {
+		panic(err)
 	}
 }
