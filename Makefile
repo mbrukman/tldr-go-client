@@ -10,6 +10,9 @@ PACKAGE=./cmd/tldr
 
 all: dev
 
+setup:
+	go get -u github.com/tombell/lodge/cmd/lodge
+
 tldr-pages:
 	rm -fr pages
 	mkdir -p pages
@@ -34,4 +37,4 @@ darwin:
 windows:
 	GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-windows-${GOARCH} ${PACKAGE}
 
-.PHONY: all tldr-pages clean dev dist build linux darwin windows
+.PHONY: all setup tldr-pages clean dev dist build linux darwin windows
