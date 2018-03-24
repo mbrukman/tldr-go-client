@@ -18,3 +18,4 @@ run
 test
 
 pages/
+pages_*.go
