@@ -14,7 +14,6 @@ setup:
 	go get -u github.com/tombell/lodge/cmd/lodge
 
 pages:
-	rm -fr pages
 	mkdir -p pages
 	curl -sSL https://github.com/tldr-pages/tldr/archive/master.tar.gz | tar -xz --strip-components=2 --directory pages tldr-master/pages/
 	cp pages/common/* pages/linux/
