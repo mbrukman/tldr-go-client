@@ -23,10 +23,10 @@ pages:
 	cp pages/common/* pages/windows/
 
 generate: pages
-	lodge -output=./pages_linux.go   -pkg=tldr -prefix=pages/linux/   -build=linux   pages/common
-	lodge -output=./pages_darwin.go  -pkg=tldr -prefix=pages/osx/     -build=darwin  pages/osx
-	lodge -output=./pages_sunos.go   -pkg=tldr -prefix=pages/sunos/   -build=sunos   pages/sunos
-	lodge -output=./pages_windows.go -pkg=tldr -prefix=pages/windows/ -build=windows pages/windows
+	lodge -pkg=tldr -output=./pages_linux.go   -prefix=pages/linux/   -build=linux   pages/common
+	lodge -pkg=tldr -output=./pages_darwin.go  -prefix=pages/osx/     -build=darwin  pages/osx
+	lodge -pkg=tldr -output=./pages_sunos.go   -prefix=pages/sunos/   -build=sunos   pages/sunos
+	lodge -pkg=tldr -output=./pages_windows.go -prefix=pages/windows/ -build=windows pages/windows
 
 clean:
 	rm -fr dist/
