@@ -31,7 +31,7 @@ generate: pages
 clean:
 	rm -fr dist/
 	rm -fr pages/
-	rm pages_*.go
+	rm -fr pages_*.go
 
 dev: build
 
