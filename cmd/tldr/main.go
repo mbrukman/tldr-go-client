@@ -10,8 +10,6 @@ import (
 
 const helpText = `Simplified and community-driven man pages
 Usage: tldr [command]
-  -version
-      Display version
 `
 
 var (
@@ -38,6 +36,7 @@ func main() {
 	}
 
 	if err := tldr.Show(args[0]); err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "err: %s\n", err)
+		os.Exit(1)
 	}
 }
