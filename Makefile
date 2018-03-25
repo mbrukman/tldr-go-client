@@ -17,9 +17,21 @@ tldr-pages:
 	rm -fr pages
 	mkdir -p pages
 	curl -sSL https://github.com/tldr-pages/tldr/archive/master.tar.gz | tar -xz --strip-components=2 --directory pages tldr-master/pages/
+	cp pages/common/* pages/linux/
+	cp pages/common/* pages/osx/
+	cp pages/common/* pages/sunos/
+	cp pages/common/* pages/windows/
+
+generate-data:
+	lodge -output=./pages_linux.go   -pkg=tldr -prefix=pages/linux/   -build=linux   pages/common
+	lodge -output=./pages_darwin.go  -pkg=tldr -prefix=pages/osx/     -build=darwin  pages/osx
+	lodge -output=./pages_sunos.go   -pkg=tldr -prefix=pages/sunos/   -build=sunos   pages/sunos
+	lodge -output=./pages_windows.go -pkg=tldr -prefix=pages/windows/ -build=windows pages/windows
 
 clean:
 	rm -fr dist/
+	rm -fr pages/
+	rm pages_*.go
 
 dev: build
 
@@ -37,4 +49,4 @@ darwin:
 windows:
 	GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-windows-${GOARCH} ${PACKAGE}
 
-.PHONY: all setup tldr-pages clean dev dist build linux darwin windows
+.PHONY: all setup tldr-pages generate-data clean dev dist build linux darwin windows
