@@ -1,5 +1,7 @@
 # tldr
 
+[![CircleCI](https://circleci.com/gh/tombell/tldr/tree/master.svg?style=svg)](https://circleci.com/gh/tombell/tldr/tree/master)
+
 > Simplified and community-driven man pages.
 
 A client for [tldr](http://tldr.sh) written in Go.
