@@ -38,6 +38,8 @@ jobs:
             - dist-{{ .Revision }}
       - run: |
           go get -u github.com/tombell/releasekit/cmd/releasekit
+          go get -u github.com/tombell/brewer/cmd/brewer
+      - run: |
           releasekit -t ${GITHUB_TOKEN} \
                      -o tombell \
                      -r tldr \
@@ -46,6 +48,16 @@ jobs:
                      --attachment dist/tldr-linux-amd64 \
                      --attachment dist/tldr-darwin-amd64 \
                      --attachment dist/tldr-windows-amd64
+      - run: |
+          brewer --token ${GITHUB_TOKEN} \
+                 --owner tombell \
+                 --name homebrew-formulae \
+                 --formula Formula/tldr.rb \
+                 --tag ${CIRCLE_TAG} \
+                 --revision ${CIRCLE_SHA1} \
+                 --commit-message "Update Formula/tldr.rb to ${CIRCLE_TAG}" \
+                 --commit-author "Tom Bell" \
+                 --commit-email "tomb@tomb.io"
 
 workflows:
   version: 2
