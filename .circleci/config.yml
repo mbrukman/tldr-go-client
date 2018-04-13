@@ -3,7 +3,7 @@ jobs:
   # build cmd/tldr
   build:
     docker:
-      - image: circleci/golang:1.9
+      - image: circleci/golang:1.10.1
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
@@ -14,7 +14,7 @@ jobs:
   # build cmd/tldr with VERSION set to git tag
   build-release:
     docker:
-      - image: circleci/golang:1.9
+      - image: circleci/golang:1.10.1
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
@@ -29,7 +29,7 @@ jobs:
   # run releasekit to generate release notes and attach build artifacts
   release:
     docker:
-      - image: circleci/golang:1.9
+      - image: circleci/golang:1.10.1
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
@@ -45,7 +45,7 @@ jobs:
                      -n ${CIRCLE_TAG} \
                      --attachment dist/tldr-linux-amd64 \
                      --attachment dist/tldr-darwin-amd64 \
-                     --attachment dist/tldr-windows-amd64 \
+                     --attachment dist/tldr-windows-amd64
 
 workflows:
   version: 2
