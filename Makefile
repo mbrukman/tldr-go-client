@@ -32,12 +32,10 @@ clean:
 	rm -fr pages/
 	rm -fr pages_*.go
 
-dev: build
+dev: generate
+	go build ${LDFLAGS} -o dist/${BINARY} ${PACKAGE}
 
 dist: generate linux darwin windows
-
-build: generate
-	go build ${LDFLAGS} -o dist/${BINARY} ${PACKAGE}
 
 linux:
 	GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-linux-${GOARCH} ${PACKAGE}
@@ -48,4 +46,4 @@ darwin:
 windows:
 	GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-windows-${GOARCH} ${PACKAGE}
 
-.PHONY: all setup generate clean dev dist build linux darwin windows
+.PHONY: all setup generate clean dev dist linux darwin windows
