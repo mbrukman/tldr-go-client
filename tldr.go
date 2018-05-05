@@ -13,8 +13,8 @@ const argumentRegex = `{{|}}`
 
 // Show render the TLDR page for the given command.
 func Show(cmd string) error {
-	bytes, ok := Assets[fmt.Sprintf("%s.md", cmd)]
-	if !ok {
+	bytes, err := GetAsset(fmt.Sprintf("%s.md", cmd))
+	if err != nil {
 		return fmt.Errorf("could not find page for %s", cmd)
 	}
 
