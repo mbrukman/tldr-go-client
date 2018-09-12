@@ -9,9 +9,8 @@ jobs:
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
-      - run: |
-          go get -u github.com/tombell/lodge/cmd/lodge
-          make dev
+      - run: make test
+      - run: make cibuild
 
   # build cmd/tldr with VERSION set to git tag
   build-release:
