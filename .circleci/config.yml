@@ -9,6 +9,7 @@ jobs:
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
+      - run: go get -u github.com/tombell/lodge/cmd/lodge
       - run: make test
       - run: make cibuild
 
@@ -21,6 +22,7 @@ jobs:
     working_directory: /go/src/github.com/tombell/tldr
     steps:
       - checkout
+      - run: go get -u github.com/tombell/lodge/cmd/lodge
       - run: VERSION="${CIRCLE_TAG}" make dist
       - save_cache:
           key: dist-{{ .Revision }}
