@@ -10,7 +10,6 @@ jobs:
     steps:
       - checkout
       - run: go get -u github.com/tombell/lodge/cmd/lodge
-      - run: make test
       - run: make cibuild
 
   # build cmd/tldr with VERSION set to git tag
