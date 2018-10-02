@@ -38,13 +38,13 @@ cibuild: generate
 dist: generate darwin linux windows
 
 darwin:
-	GOOS=darwin GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-darwin-amd64 ${PACKAGE}
+	GOOS=darwin GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-darwin-amd64 ${PACKAGE}
 
 linux:
-	GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-linux-amd64 ${PACKAGE}
+	GOOS=linux GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-linux-amd64 ${PACKAGE}
 
 windows:
-	GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o dist/${BINARY}-windows-amd64 ${PACKAGE}
+	GOOS=windows GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-windows-amd64 ${PACKAGE}
 
 test:
 	go test ${MODFLAGS} ./...
