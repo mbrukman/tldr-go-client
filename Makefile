@@ -30,9 +30,6 @@ clean:
 	rm -fr pages_*.go
 
 dev: generate
-	go build ${LDFLAGS} -o dist/${BINARY} ${PACKAGE}
-
-cibuild: generate
 	go build ${MODFLAGS} ${LDFLAGS} -o dist/${BINARY} ${PACKAGE}
 
 dist: generate darwin linux windows
@@ -49,4 +46,4 @@ windows:
 test:
 	go test ${MODFLAGS} ./...
 
-.PHONY: all setup generate clean dev cibuild dist darwin linux windows test
+.PHONY: all setup generate clean dev dist darwin linux windows test
