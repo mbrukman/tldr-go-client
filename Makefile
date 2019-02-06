@@ -4,10 +4,14 @@ COMMIT=$(shell git rev-parse HEAD | cut -c -8)
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Commit=${COMMIT}"
 MODFLAGS=-mod=vendor
 
-BINARY=tldr
-PACKAGE=./cmd/tldr
+PLATFORMS:=darwin linux windows
 
 all: dev
+
+clean:
+	rm -fr dist/
+	rm -fr pages/
+	rm -fr pages_*.go
 
 setup:
 	go get -u github.com/tombell/lodge/cmd/lodge
@@ -24,26 +28,15 @@ generate: pages
 	lodge -gzip -pkg=tldr -output=./pages_darwin.go  -prefix=pages/osx/     -build=darwin  pages/osx
 	lodge -gzip -pkg=tldr -output=./pages_windows.go -prefix=pages/windows/ -build=windows pages/windows
 
-clean:
-	rm -fr dist/
-	rm -fr pages/
-	rm -fr pages_*.go
-
 dev: generate
-	go build ${MODFLAGS} ${LDFLAGS} -o dist/${BINARY} ${PACKAGE}
+	go build ${MODFLAGS} ${LDFLAGS} -o dist/tldr ./cmd/tldr
 
-dist: generate darwin linux windows
+dist: generate $(PLATFORMS)
 
-darwin:
-	GOOS=darwin GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-darwin-amd64 ${PACKAGE}
-
-linux:
-	GOOS=linux GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-linux-amd64 ${PACKAGE}
-
-windows:
-	GOOS=windows GOARCH=amd64 go build ${LDFLAGS} -o dist/${BINARY}-windows-amd64 ${PACKAGE}
+$(PLATFORMS):
+	GOOS=$@ GOARCH=amd64 go build ${MODFLAGS} ${LDFLAGS} -o dist/tldr-$@-amd64 ./cmd/tldr
 
 test:
 	go test ${MODFLAGS} ./...
 
-.PHONY: all setup generate clean dev dist darwin linux windows test
+.PHONY: all clean setup generate dev dist darwin linux windows test
