@@ -13,7 +13,7 @@ Usage: tldr [command]
 `
 
 var (
-	version = flag.Bool("version", false, "")
+	vrsn = flag.Bool("version", false, "")
 )
 
 func usage() {
@@ -25,8 +25,8 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	if *version {
-		fmt.Fprintf(os.Stdout, "tldr %s (%s)\n", Version, Commit)
+	if *vrsn {
+		fmt.Fprintf(os.Stdout, "tldr %s (%s)\n", version, commit)
 		os.Exit(0)
 	}
 
